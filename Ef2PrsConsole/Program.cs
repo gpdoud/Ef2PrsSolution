@@ -9,7 +9,13 @@ namespace Ef2PrsConsole {
 
             var _context = new prs0Context();
 
+            var vendors = _context.Vendors.ToList();
+            // gets a single value if exist or return null
+            var bbuy = _context.Vendors.SingleOrDefault(v => v.Code == "BBUY");
+
             var ReqCtrl = new RequestsController(_context);
+            var requestInReview = ReqCtrl.GetRequestsInReview();
+
             var updTotal = ReqCtrl.RecalculateRequestTotal(1);
 
             var req1 = _context.Requests.Find(1);

@@ -15,6 +15,10 @@ namespace Ef2PrsLib {
             _context = context;
         }
 
+        public List<Request> GetRequestsInReview() {
+            return _context.Requests.Where(r => r.Status == "REVIEW").ToList();
+        }
+
         public bool RecalculateRequestTotal(int Id) {
             var request = _context.Requests.Find(Id);
             var reqTotal = (from li in _context.Lineitems.ToList()
@@ -36,7 +40,7 @@ namespace Ef2PrsLib {
         /// </summary>
         /// <param name="request">A request</param>
         /// <returns>True if successful; else false</returns>
-        public bool ReviewRequest(Requests request) {
+        public bool ReviewRequest(Request request) {
             //if(request.Total <= 50) {
             //    request.Status = "APPROVED";
             //} else {
@@ -52,7 +56,7 @@ namespace Ef2PrsLib {
         /// </summary>
         /// <param name="request">A single request</param>
         /// <returns>True if successful; else false</returns>
-        public bool SetToRejected(Requests request) {
+        public bool SetToRejected(Request request) {
             request.Status = "REJECTED";
             _context.SaveChanges();
             return true;
@@ -63,7 +67,7 @@ namespace Ef2PrsLib {
         /// </summary>
         /// <param name="request">A single request</param>
         /// <returns>True if successful; else false</returns>
-        public bool SetToApproved(Requests request) {
+        public bool SetToApproved(Request request) {
             request.Status = "APPROVED";
             _context.SaveChanges();
             return true;

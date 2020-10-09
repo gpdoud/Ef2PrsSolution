@@ -11,6 +11,6 @@ namespace Ef2PrsConsole
         public int Quantity { get; set; }
 
         public virtual Products Product { get; set; }
-        public virtual Requests Request { get; set; }
+        public virtual Request Request { get; set; }
     }
 }

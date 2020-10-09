@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Ef2PrsConsole
 {
-    public partial class Requests
+    public partial class Request
     {
-        public Requests()
+        public Request()
         {
             Lineitems = new HashSet<Lineitems>();
         }

@@ -1,39 +1,31 @@
 ﻿using System;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Ef2PrsConsole
-{
-    public partial class prs0Context : DbContext
-    {
-        public prs0Context()
-        {
+namespace Ef2PrsConsole {
+    public partial class prs0Context : DbContext {
+        public prs0Context() {
         }
 
         public prs0Context(DbContextOptions<prs0Context> options)
-            : base(options)
-        {
+            : base(options) {
         }
 
         public virtual DbSet<Lineitems> Lineitems { get; set; }
         public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Requests> Requests { get; set; }
+        public virtual DbSet<Request> Requests { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Vendors> Vendors { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+            if(!optionsBuilder.IsConfigured) {
                 optionsBuilder.UseSqlServer("server=localhost\\sqlexpress;database=prs0;trusted_connection=true;");
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Lineitems>(entity =>
-            {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Lineitems>(entity => {
                 entity.ToTable("LINEITEMS");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -53,8 +45,7 @@ namespace Ef2PrsConsole
                     .HasConstraintName("FK__LINEITEMS__Reque__37A5467C");
             });
 
-            modelBuilder.Entity<Products>(entity =>
-            {
+            modelBuilder.Entity<Products>(entity => {
                 entity.ToTable("PRODUCTS");
 
                 entity.HasIndex(e => e.PartNumber)
@@ -90,8 +81,7 @@ namespace Ef2PrsConsole
                     .HasConstraintName("FK__PRODUCTS__Vendor__2D27B809");
             });
 
-            modelBuilder.Entity<Requests>(entity =>
-            {
+            modelBuilder.Entity<Request>(entity => {
                 entity.ToTable("REQUESTS");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -139,8 +129,7 @@ namespace Ef2PrsConsole
                     .HasConstraintName("FK__REQUESTS__UserId__300424B4");
             });
 
-            modelBuilder.Entity<Users>(entity =>
-            {
+            modelBuilder.Entity<Users>(entity => {
                 entity.ToTable("USERS");
 
                 entity.HasIndex(e => e.UserName)
@@ -180,8 +169,7 @@ namespace Ef2PrsConsole
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Vendors>(entity =>
-            {
+            modelBuilder.Entity<Vendors>(entity => {
                 entity.ToTable("VENDORS");
 
                 entity.HasIndex(e => e.Code)
